@@ -48,7 +48,7 @@ Para sincronizar la base de datos con el modelo de datos definido en Prisma, eje
       npx prisma migrate dev
   ```
 
-## Ejecución
+## 🚀 Ejecución
 Ahora puedes iniciar el servidor de desarrollo de Next.js con:
 ```bash
   npm run dev
