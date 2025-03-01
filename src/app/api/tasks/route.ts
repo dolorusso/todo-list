@@ -1,23 +1,21 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 
-// Iniciar Prisma Client dentro de cada handler
-// y cerrar la conexión después de cada operación
+// Iniciar Prisma Client
+const prisma = new PrismaClient();
+
+// Obtener todas las tareas
 export async function GET() {
-  const prisma = new PrismaClient();
   try {
     const tasks = await prisma.task.findMany();
-    return NextResponse.json(tasks || []);  // Devuelve un array vacío si hay un error
-  } catch (error) {
-    console.error("Error fetching tasks:", error);
+    return NextResponse.json(tasks);
+  } catch {
     return NextResponse.json({ error: "Failed to fetch tasks" }, { status: 500 });
-  } finally {
-    await prisma.$disconnect();  // Cerrar conexión
   }
 }
 
+// Crear una nueva tarea
 export async function POST(req: Request) {
-  const prisma = new PrismaClient();
   try {
     const { text } = await req.json();
     if (!text || text.trim() === "") {
@@ -29,16 +27,13 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json(newTask, { status: 201 });
-  } catch (error) {
-    console.error("Error creating task:", error);
+  } catch {
     return NextResponse.json({ error: "Failed to create task" }, { status: 500 });
-  } finally {
-    await prisma.$disconnect();  // Cerrar conexión
   }
 }
 
+// Actualizar una tarea
 export async function PUT(req: Request) {
-  const prisma = new PrismaClient();
   try {
     const { id, completed, text } = await req.json();
 
@@ -52,16 +47,13 @@ export async function PUT(req: Request) {
     });
 
     return NextResponse.json(updatedTask);
-  } catch (error) {
-    console.error("Error updating task:", error);
+  } catch {
     return NextResponse.json({ error: "Failed to update task" }, { status: 500 });
-  } finally {
-    await prisma.$disconnect();  // Cerrar conexión
   }
 }
 
+// Eliminar una tarea
 export async function DELETE(req: Request) {
-  const prisma = new PrismaClient();
   try {
     const { id } = await req.json();
     if (!id) {
@@ -71,10 +63,7 @@ export async function DELETE(req: Request) {
     await prisma.task.delete({ where: { id } });
 
     return NextResponse.json({ message: "Task deleted" });
-  } catch (error) {
-    console.error("Error deleting task:", error);
+  } catch {
     return NextResponse.json({ error: "Failed to delete task" }, { status: 500 });
-  } finally {
-    await prisma.$disconnect();  // Cerrar conexión
   }
 }
