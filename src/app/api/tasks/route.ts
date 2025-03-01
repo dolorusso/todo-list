@@ -1,24 +1,25 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 
-//inicar prisma
+// Iniciar Prisma Client
 const prisma = new PrismaClient();
 
-//obtener todas las tareas
+// Obtener todas las tareas
 export async function GET() {
   try {
     const tasks = await prisma.task.findMany();
     return NextResponse.json(tasks);
   } catch (error) {
+    console.error("Error fetching tasks:", error);  // Para debug
     return NextResponse.json({ error: "Failed to fetch tasks" }, { status: 500 });
   }
 }
 
-//crear una nueva tarea
+// Crear una nueva tarea
 export async function POST(req: Request) {
   try {
     const { text } = await req.json();
-    if (!text) {
+    if (!text || text.trim() === "") {
       return NextResponse.json({ error: "Task text is required" }, { status: 400 });
     }
 
@@ -28,14 +29,16 @@ export async function POST(req: Request) {
 
     return NextResponse.json(newTask, { status: 201 });
   } catch (error) {
+    console.error("Error creating task:", error);  // Para debug
     return NextResponse.json({ error: "Failed to create task" }, { status: 500 });
   }
 }
 
-//actualizar una tarea
+// Actualizar una tarea
 export async function PUT(req: Request) {
   try {
     const { id, completed, text } = await req.json();
+
     if (!id || typeof completed !== "boolean") {
       return NextResponse.json({ error: "Invalid task update data" }, { status: 400 });
     }
@@ -47,11 +50,12 @@ export async function PUT(req: Request) {
 
     return NextResponse.json(updatedTask);
   } catch (error) {
+    console.error("Error updating task:", error);  // Para debug
     return NextResponse.json({ error: "Failed to update task" }, { status: 500 });
   }
 }
 
-//eliminar una tarea
+// Eliminar una tarea
 export async function DELETE(req: Request) {
   try {
     const { id } = await req.json();
@@ -63,6 +67,7 @@ export async function DELETE(req: Request) {
 
     return NextResponse.json({ message: "Task deleted" });
   } catch (error) {
+    console.error("Error deleting task:", error);  // Para debug
     return NextResponse.json({ error: "Failed to delete task" }, { status: 500 });
   }
 }
