@@ -1,21 +1,20 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 
-// Iniciar Prisma Client
+//iniciar prisma
 const prisma = new PrismaClient();
 
-// Obtener todas las tareas
+//obtener tareas
 export async function GET() {
   try {
     const tasks = await prisma.task.findMany();
     return NextResponse.json(tasks);
-  } catch (error) {
-    console.error("Error fetching tasks:", error);  // Para debug
+  } catch {
     return NextResponse.json({ error: "Failed to fetch tasks" }, { status: 500 });
   }
 }
 
-// Crear una nueva tarea
+//crear nueva tarea
 export async function POST(req: Request) {
   try {
     const { text } = await req.json();
@@ -28,13 +27,12 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json(newTask, { status: 201 });
-  } catch (error) {
-    console.error("Error creating task:", error);  // Para debug
+  } catch {
     return NextResponse.json({ error: "Failed to create task" }, { status: 500 });
   }
 }
 
-// Actualizar una tarea
+//actualizar tarea
 export async function PUT(req: Request) {
   try {
     const { id, completed, text } = await req.json();
@@ -49,13 +47,12 @@ export async function PUT(req: Request) {
     });
 
     return NextResponse.json(updatedTask);
-  } catch (error) {
-    console.error("Error updating task:", error);  // Para debug
+  } catch {
     return NextResponse.json({ error: "Failed to update task" }, { status: 500 });
   }
 }
 
-// Eliminar una tarea
+//eliminar tarea
 export async function DELETE(req: Request) {
   try {
     const { id } = await req.json();
@@ -66,8 +63,7 @@ export async function DELETE(req: Request) {
     await prisma.task.delete({ where: { id } });
 
     return NextResponse.json({ message: "Task deleted" });
-  } catch (error) {
-    console.error("Error deleting task:", error);  // Para debug
+  } catch {
     return NextResponse.json({ error: "Failed to delete task" }, { status: 500 });
   }
 }
