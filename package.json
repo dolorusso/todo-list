@@ -4,6 +4,8 @@
     "private": true,
     "scripts": {
       "dev": "next dev",
+      "preinstall": "rm -rf node_modules/.prisma && rm -rf prisma/generated",
+      "postinstall": "prisma generate",
       "build": "next build && prisma generate",
       "start": "next start",
       "lint": "next lint"
