@@ -38,7 +38,7 @@ Este proyecto utiliza PostgreSQL como base de datos. Para configurarla en tu má
 
 - Configurar las credenciales en el archivo .env: En el archivo .env, agrega las credenciales de tu base de datos. Si aún no tienes un archivo .env, crea uno en la raíz del proyecto y agrega lo siguiente:
   ```bash
-      DATABASE_URL="postgresql://usuario:contraseña@localhost:5432/nombre_de_base_de_datos"
+  DATABASE_URL="postgresql://usuario:contraseña@localhost:5432/nombre_de_base_de_datos"
   ```
 Reemplaza usuario, contraseña y nombre_de_base_de_datos con tus propias credenciales.
 
