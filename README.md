@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TO-DO List
 
-## Getting Started
+## Descripción
 
-First, run the development server:
+Este proyecto es una aplicación de lista de tareas (To-Do List) que permite realizar un **CRUD** (Crear, Leer, Actualizar, Eliminar) de tareas.
+
+## Tecnologías utilizadas
+
+- **PostgreSQL** para la base de datos.
+- **Prisma** como ORM para interactuar con PostgreSQL.
+- **Next.js** como framework para construir la aplicación web.
+- **TypeScript** para mejorar la experiencia de desarrollo con tipado estático.
+- **Tailwind CSS** para un diseño responsivo y moderno.
+
+## Instalación
+
+### 1. Clonar el repositorio
+Clona este repositorio en tu máquina local utilizando Git:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  git clone https://github.com/tu-usuario/todo-app.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Instalar dependencias
+```bash
+  cd todo-app
+  npm install
+  # o si usas yarn
+  yarn install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Configurar la base de datos
+Este proyecto utiliza PostgreSQL como base de datos. Para configurarla en tu máquina local, sigue estos pasos:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Instalar PostgreSQL
 
-## Learn More
+- Crear una base de datos: crea una base de datos con el nombre que prefieras (por ejemplo, todo-app).
 
-To learn more about Next.js, take a look at the following resources:
+- Configurar las credenciales en el archivo .env: en el archivo .env, agrega las credenciales de tu base de datos. Si aún no tienes un archivo .env, crea uno en la raíz del proyecto y agrega lo siguiente:
+  ```bash
+  DATABASE_URL="postgresql://usuario:contraseña@localhost:5432/nombre_de_base_de_datos"
+  ```
+Reemplaza usuario, contraseña y nombre_de_base_de_datos con tus propias credenciales.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. Ejecutar las migraciones de Prisma
+Para sincronizar la base de datos con el modelo de datos definido en Prisma, ejecuta las migraciones:
+  ```bash
+      npx prisma migrate dev
+  ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🚀 Ejecución
+Ahora puedes iniciar el servidor de desarrollo de Next.js con:
+```bash
+  npm run dev
+  # o si usas yarn
+  yarn dev
+```
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
