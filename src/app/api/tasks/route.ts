@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 
-// Iniciar Prisma Client
+//iniciar prisma
 const prisma = new PrismaClient();
 
 // Obtener todas las tareas
@@ -14,7 +14,7 @@ export async function GET() {
   }
 }
 
-// Crear una nueva tarea
+//crear nueva tarea
 export async function POST(req: Request) {
   try {
     const { text } = await req.json();
@@ -32,7 +32,7 @@ export async function POST(req: Request) {
   }
 }
 
-// Actualizar una tarea
+//actualizar tarea
 export async function PUT(req: Request) {
   try {
     const { id, completed, text } = await req.json();
@@ -52,7 +52,7 @@ export async function PUT(req: Request) {
   }
 }
 
-// Eliminar una tarea
+//eliminar tarea
 export async function DELETE(req: Request) {
   try {
     const { id } = await req.json();
