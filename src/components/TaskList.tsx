@@ -17,7 +17,7 @@ export default function TaskList({ tasks, toggleTask, deleteTask, updateTask }: 
   const validTasks = Array.isArray(tasks) ? tasks : [];
   return (
     <ul>
-      {tasks.map((task) => (
+      {validTasks.map((task) => (
         <TaskItem
           key={task.id}
           task={task}
