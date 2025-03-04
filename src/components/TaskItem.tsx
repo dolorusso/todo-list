@@ -38,7 +38,7 @@ export default function TaskItem({ task, toggleTask, deleteTask, updateTask }: T
 
     if (result.isConfirmed) {
       deleteTask(task.id);
-      Swal.fire("Eliminado", "Tu tarea ha sido eliminada.", "success");
+      Swal.fire("Eliminada", "Tu tarea ha sido eliminada.", "success");
     }
   };
 
