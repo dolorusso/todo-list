@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Swal from "sweetalert2";
+import Swal from "sweetalert2"; //uso esta libreria para el pop up
 
 interface Task {
   id: number;
