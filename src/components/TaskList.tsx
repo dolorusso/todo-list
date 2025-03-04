@@ -14,6 +14,7 @@ interface TaskListProps {
 }
 
 export default function TaskList({ tasks, toggleTask, deleteTask, updateTask }: TaskListProps) {
+  const validTasks = Array.isArray(tasks) ? tasks : [];
   return (
     <ul>
       {tasks.map((task) => (
