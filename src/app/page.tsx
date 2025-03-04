@@ -15,8 +15,15 @@ export default function Home() {
   useEffect(() => {
     fetch("/api/tasks")
       .then((res) => res.json())
-      .then((data) => setTasks(data));
+      .then((data) => {
+        setTasks(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching tasks:", error);
+        setTasks([]);
+      });
   }, []);
+    
 
   const addTask = async (text: string) => {
     const res = await fetch("/api/tasks", {
