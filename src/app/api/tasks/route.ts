@@ -4,7 +4,7 @@ import { PrismaClient } from "@prisma/client";
 //iniciar prisma
 const prisma = new PrismaClient();
 
-// Obtener todas las tareas
+//obtener todas las tareas
 export async function GET() {
   try {
     const tasks = await prisma.task.findMany();
