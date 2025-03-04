@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 interface Task {
   id: number;
@@ -21,6 +22,24 @@ export default function TaskItem({ task, toggleTask, deleteTask, updateTask }: T
   const handleUpdate = () => {
     updateTask(task.id, newText, completed);
     setIsEditing(false); 
+  };
+
+  const handleDelete = async () => {
+    const result = await Swal.fire({
+      title: "¿Estás seguro?",
+      text: "No podrás recuperar esta tarea después de eliminarla.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar",
+    });
+
+    if (result.isConfirmed) {
+      deleteTask(task.id);
+      Swal.fire("Eliminado", "Tu tarea ha sido eliminada.", "success");
+    }
   };
 
   return (
@@ -68,7 +87,7 @@ export default function TaskItem({ task, toggleTask, deleteTask, updateTask }: T
       )}
       <button
         className="bg-red-500 text-white hover:bg-red-600 rounded px-3 py-1"
-        onClick={() => deleteTask(task.id)}
+        onClick={handleDelete}
       >
         Eliminar
       </button>
